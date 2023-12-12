@@ -1,0 +1,45 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Button;
+import android.widget.Toast;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+    private  static final String VALID_USERNAME="user";
+    private  static final String VALID_PASSWORD="password";
+
+    private EditText usernameEditText;
+    private  EditText passwordEditText;
+    private Button loginButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        usernameEditText=findViewById(R.id.usernameEditText);
+        passwordEditText=findViewById(R.id.passwordEditText);
+        loginButton=findViewById(R.id.loginButton);
+
+        loginButton.setOnClickListener(v ->{
+
+                    String enteredUsername=usernameEditText.getText().toString();
+                    String enteredPassword=passwordEditText.getText().toString();
+                    if(isValidCredentials(enteredUsername,enteredPassword)){
+                        showToast("Login succesful.");
+                    }
+                    else{
+                        showToast("Invalid credentials");
+                    }
+                }
+
+
+        );}
+    private  boolean isValidCredentials(String enteredUsername, String enteredPassword){
+        return VALID_USERNAME.equals(enteredUsername) && VALID_PASSWORD.equals(enteredPassword);
+    }
+    private void showToast(String message){
+        Toast.makeText( this,message,Toast.LENGTH_SHORT).show();
+    }
+    }
